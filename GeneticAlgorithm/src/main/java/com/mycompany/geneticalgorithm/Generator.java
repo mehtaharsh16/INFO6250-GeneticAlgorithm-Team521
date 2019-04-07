@@ -1,31 +1,44 @@
 package com.mycompany.geneticalgorithm;
 
+import java.util.Random;
+
+/*
+    @param = fitValue is the fitness value to be compared with each person's fit value
+*/
+
+
 public class Generator {
+    
+    private final long fitValue = 2000;
+    public char checkSex(Person p){
 
-    public char checkSex(String personId){
-
-        return '0';
+        return p.getSex();
     }
 
 
-    public boolean checkFertilty(String personId){
-
-        return true;
+    public boolean checkFertilty(Person p){
+        if (p.isFertile()){
+            return true;
+        }else
+            return false;
     }
 
 
-    public long generatePhenotype(Person person){
-
-
-
-        return 0;
+    public long generatePhenotype(Person p1, Person p2){
+            long rankValue = 0;
+            Random r = new Random();
+            int male = r.nextInt(p1.getPersonID().length()*10);
+            int female = r.nextInt(p2.getPersonID().length()*12);
+            
+            rankValue = (long) Math.log(Math.exp(1.5)) * (p1.getRank()*female + p2.getRank() * male);
+            
+        return rankValue;
     }
 
 
-    public boolean isFit(){
-
-
-        return false;
+    public boolean isFit(long rank){
+      boolean compare = (rank < fitValue) ? false : true;  
+       return  compare;
     }
 
 
