@@ -14,6 +14,15 @@ public class Person {
     private char sex;
     private boolean fertile;
     private long rank;
+    private int generation;
+
+    public int getGeneration() {
+        return generation;
+    }
+
+    public void setGeneration(int generation) {
+        this.generation = generation;
+    }
 
     public String getPersonID() {
         return personID;
@@ -46,5 +55,16 @@ public class Person {
     public void setRank(long rank) {
         this.rank = rank;
     }
-    
+
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "personID='" + personID + '\'' +
+                ", sex=" + sex +
+                ", fertile=" + fertile +
+                ", rank=" + rank +
+                ", generation=" + generation +
+                '}';
+    }
 }
