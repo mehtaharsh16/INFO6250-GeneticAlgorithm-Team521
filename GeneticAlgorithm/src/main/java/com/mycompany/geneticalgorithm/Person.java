@@ -40,7 +40,7 @@ public class Person {
         this.sex = sex;
     }
 
-    public boolean isFertile() {
+    public boolean getFertile() {
         return fertile;
     }
 
@@ -55,7 +55,6 @@ public class Person {
     public void setRank(long rank) {
         this.rank = rank;
     }
-
 
     @Override
     public String toString() {

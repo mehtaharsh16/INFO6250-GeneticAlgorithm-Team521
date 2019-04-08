@@ -8,6 +8,7 @@ import java.util.Random;
 
 
 public class Generator {
+
     
     private final long fitValue = 2000;
     public char checkSex(Person p){
@@ -17,7 +18,7 @@ public class Generator {
 
 
     public boolean checkFertilty(Person p){
-        if (p.isFertile()){
+        if (p.getFertile()){
             return true;
         }else
             return false;
@@ -25,11 +26,11 @@ public class Generator {
 
 
     public long generatePhenotype(Person p1, Person p2){
+
             long rankValue = 0;
             Random r = new Random();
-            int male = r.nextInt(p1.getPersonID().length()*10);
-            int female = r.nextInt(p2.getPersonID().length()*12);
-            
+            long male = r.nextInt(p1.getPersonID().length()*10);
+            long female = r.nextInt(p2.getPersonID().length()*12);
             rankValue = (long) Math.log(Math.exp(1.5)) * (p1.getRank()*female + p2.getRank() * male);
             
         return rankValue;
