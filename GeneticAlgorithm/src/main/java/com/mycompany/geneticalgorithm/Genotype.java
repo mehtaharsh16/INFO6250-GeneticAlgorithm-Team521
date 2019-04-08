@@ -29,6 +29,7 @@ public class Genotype {
 
         for(Person k : genotypePopulation){
             System.out.println(k);
+            
         }
     }
 }
