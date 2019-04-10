@@ -29,8 +29,8 @@ public class Generator {
 
             long rankValue = 0;
             Random r = new Random();
-            long male = r.nextInt(p1.getPersonID().length()*10);
-            long female = r.nextInt(p2.getPersonID().length()*12);
+            long male = r.nextInt((p1.getPersonID().length())) / 3;
+            long female = r.nextInt((p2.getPersonID().length())) / 3;
             rankValue = (long) Math.log(Math.exp(1.5)) * (p1.getRank()*female + p2.getRank() * male);
             
         return rankValue;
