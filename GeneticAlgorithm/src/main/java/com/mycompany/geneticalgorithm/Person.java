@@ -13,13 +13,16 @@ public class Person {
     private String personID;
     private char sex;
     private boolean fertile;
-    private long rank;
+    private double rank;
     private int generation;
+  //  boolean tested;
 
     public int getGeneration() {
         return generation;
     }
-
+ 
+    
+    
     public void setGeneration(int generation) {
         this.generation = generation;
     }
@@ -48,13 +51,15 @@ public class Person {
         this.fertile = fertile;
     }
 
-    public long getRank() {
+    public double getRank() {
         return rank;
     }
 
-    public void setRank(long rank) {
+    public void setRank(double rank) {
         this.rank = rank;
     }
+
+
 
     @Override
     public String toString() {

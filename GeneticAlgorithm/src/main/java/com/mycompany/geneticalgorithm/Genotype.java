@@ -1,64 +1,76 @@
 package com.mycompany.geneticalgorithm;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Genotype {
-
+    
+    static int sampleLength = 10;
     private static Random r = new Random();
-
-
-     Person[] genotypePopulation = new Person[2000];
-
-
+    
+    
     public static void main(String[] args) {
+        List<Person> genotypePopulation = new ArrayList<Person>();
         Genotype genotype= new Genotype();
         Generator generator = new Generator();
-        Person[] temp = new Person[2000];
+       
         int j = 0;
         String str = "MF";
         char[] genderArray = str.toCharArray();
         int len = genderArray.length;
         //Random r = new Random();
-        for (int i = 0; i <2000; i++) {
+        for (int i = 0; i <sampleLength; i++) {
             Person p = new Person();
             char sex = genderArray[r.nextInt(len)];
             p.setPersonID("P" + i + sex);
             p.setSex(sex);
             p.setFertile(r.nextBoolean());
-            p.setRank(r.nextInt(800) / 3);
+            p.setRank((r.nextInt(800)/3)+1);
             p.setGeneration(1);
-            genotype.genotypePopulation[i] = p;
+          
+            genotypePopulation.add(p);
         }
-        int totalvisits = (int) (0.5 * genotype.genotypePopulation.length * Math.log(genotype.genotypePopulation.length));
-        int k = 2;
+        long startTime = System.nanoTime();
+        int totalvisits = (int) (0.5 * genotypePopulation.size() * Math.log(genotypePopulation.size()));
+       // int k = 1;
        // int currGen = 1;
 
-        while(k<10) {
+        for (int k=2;k<=10;k++){
+             List<Person> temp = new ArrayList<Person>();
+            //System.out.println("Genotype population"+genotypePopulation.size());
+            //System.out.println(k);
             for (int i = 0; i < totalvisits; i++) {
-                if (j >= 2000) break;
-                int randomperson1 = r.nextInt((genotype.genotypePopulation.length));
-                if (!genotype.genotypePopulation[randomperson1].getFertile()) {
+                if (j >= sampleLength) break;
+                
+                int randomperson1 = r.nextInt((genotypePopulation.size()));
+             
+               
+                if (!genotypePopulation.get(randomperson1).getFertile()){
                     continue;
                 } else {
-                    int randomperson2 = r.nextInt(genotype.genotypePopulation.length);
-                    if (genotype.genotypePopulation[randomperson1].getSex() == 'M') {
-                        while ((genotype.genotypePopulation[randomperson2].getSex() != 'F') || !(genotype.genotypePopulation[randomperson2].getFertile())) {
+                    int randomperson2 = r.nextInt(genotypePopulation.size());
+                    
+                    if (genotypePopulation.get(randomperson1).getSex() == 'M') {
+                        while ((genotypePopulation.get(randomperson2).getSex() != 'F') || !(genotypePopulation.get(randomperson2).getFertile())) {
 
-                            randomperson2 = r.nextInt(genotype.genotypePopulation.length);
-                            if (genotype.genotypePopulation[randomperson2].getFertile() && genotype.genotypePopulation[randomperson2].getSex() == 'F')
+                            randomperson2 = r.nextInt(genotypePopulation.size());
+                            if (genotypePopulation.get(randomperson2).getFertile() && genotypePopulation.get(randomperson2).getSex() == 'F' )
                                 break;
                             continue;
 
                         }
-                        long rankvalue = generator.generatePhenotype(genotype.genotypePopulation[randomperson1], genotype.genotypePopulation[randomperson2]);
+                        double rankvalue = generator.generatePhenotype(genotypePopulation.get(randomperson1), genotypePopulation.get(randomperson2));
                         if (generator.isFit(rankvalue)) {
-                            String child = genotype.genotypePopulation[randomperson1].getPersonID() + genotype.genotypePopulation[randomperson2].getPersonID();
+                            String child = genotypePopulation.get(randomperson1).getPersonID() + genotypePopulation.get(randomperson2).getPersonID();
                             System.out.println(child);
                             return;
                         } else {
                             Person person = new Person();
-                            person.setPersonID(genotype.genotypePopulation[randomperson1].getPersonID() + genotype.genotypePopulation[randomperson2].getPersonID());
+                            person.setPersonID(genotypePopulation.get(randomperson1).getPersonID() + genotypePopulation.get(randomperson2).getPersonID());
+                            //k+=1;
                             person.setGeneration(k);
+                            //System.out.println(k);
                             person.setRank(rankvalue);
                             if (r.nextInt(2) < 1) {
                                 person.setFertile(true);
@@ -70,26 +82,28 @@ public class Genotype {
                             } else {
                                 person.setSex('F');
                             }
-                            temp[j++] = person;
-
+                            temp.add(person);
+                            j+=1;
                         }
-                    } else if (genotype.genotypePopulation[randomperson1].getSex() == 'F') {
-                        while ((genotype.genotypePopulation[randomperson2].getSex() != 'M') || !(genotype.genotypePopulation[randomperson2].getFertile())) {
-                            randomperson2 = r.nextInt(genotype.genotypePopulation.length);
-                            if (genotype.genotypePopulation[randomperson2].getFertile() && genotype.genotypePopulation[randomperson2].getSex() == 'M')
+                    } else if (genotypePopulation.get(randomperson1).getSex() == 'F') {
+                        while ((genotypePopulation.get(randomperson2).getSex() != 'M') || !(genotypePopulation.get(randomperson2).getFertile())) {
+                            randomperson2 = r.nextInt(genotypePopulation.size());
+                            if (genotypePopulation.get(randomperson2).getFertile() && genotypePopulation.get(randomperson2).getSex() == 'M' )
                                 break;
                             continue;
 
                         }
-                        long rankvalue = generator.generatePhenotype(genotype.genotypePopulation[randomperson1], genotype.genotypePopulation[randomperson2]);
+                        double rankvalue = generator.generatePhenotype(genotypePopulation.get(randomperson1), genotypePopulation.get(randomperson2));
                         if (generator.isFit(rankvalue)) {
-                            String child = genotype.genotypePopulation[randomperson1].getPersonID() + genotype.genotypePopulation[randomperson2].getPersonID();
+                            String child = genotypePopulation.get(randomperson1).getPersonID() + genotypePopulation.get(randomperson2).getPersonID();
                             System.out.println(child);
                             return;
                         } else {
                             Person person = new Person();
-                            person.setPersonID(genotype.genotypePopulation[randomperson1].getPersonID() + genotype.genotypePopulation[randomperson2].getPersonID());
+                            person.setPersonID(genotypePopulation.get(randomperson1).getPersonID() + genotypePopulation.get(randomperson2).getPersonID());
+                            //k+=1;
                             person.setGeneration(k);
+                            //System.out.println(k);
                             person.setRank(rankvalue);
                             if (r.nextInt(2) < 1) {
                                 person.setFertile(true);
@@ -101,19 +115,22 @@ public class Genotype {
                             } else {
                                 person.setSex('F');
                             }
-                            temp[j++] = person;
+                            temp.add(person);
+                            j+=1;
                         }
                     }
                 }
             }
-            k++;
-            genotype.genotypePopulation = temp;
-            for(Person p:genotype.genotypePopulation)
-            {
-                System.out.println(p);
+            
+            genotypePopulation = temp;
+           for(Person p:genotypePopulation)
+           {   
+               if(p!=null)
+               System.out.println(p);
             }
+            
         }
-
-
+        long endTime = System.nanoTime();
+        System.out.println("Time taken for find the super human genome is "+(endTime-startTime));
     }
 }
