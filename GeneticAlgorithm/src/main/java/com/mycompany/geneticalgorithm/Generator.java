@@ -11,7 +11,7 @@ import java.util.Random;
 public class Generator {
 
     
-    private final double fitValue = 60;
+    private final double fitValue = 200;
     public char checkSex(Person p){
 
         return p.getSex();
@@ -30,8 +30,8 @@ public class Generator {
 
             double rankValue;
             Random r = new Random();
-            double male = r.nextInt((p1.getPersonID().length())) * 2.97;
-            double female = r.nextInt((p2.getPersonID().length())) * 4.37;
+            double male = r.nextInt((p1.getPersonID().length())) * 0.33;
+            double female = r.nextInt((p2.getPersonID().length())) * 1.35;
             rankValue = (Math.log(1.5) * (p1.getRank()*female + p2.getRank() * male) * 0.2) ;
             
         return rankValue;
