@@ -6,8 +6,11 @@
 package com.mycompany.geneticalgorithm;
 
 /**
- *
  * @author Welcome
+ */
+
+/**
+ * Below is the person class
  */
 public class Person {
     private String personID;
@@ -15,14 +18,12 @@ public class Person {
     private boolean fertile;
     private double rank;
     private int generation;
-  //  boolean tested;
 
     public int getGeneration() {
         return generation;
     }
- 
-    
-    
+
+
     public void setGeneration(int generation) {
         this.generation = generation;
     }
@@ -58,7 +59,6 @@ public class Person {
     public void setRank(double rank) {
         this.rank = rank;
     }
-
 
 
     @Override
