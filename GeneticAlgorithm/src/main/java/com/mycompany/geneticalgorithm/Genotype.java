@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
  */
 public class Genotype {
 
-    static int sampleLength = 10;
+    static int sampleLength = 80;
     private static Random r = new Random();
     CompletableFuture<String> completableFuture = new CompletableFuture<>();
     Generator generator = new Generator();
 
-    private static ForkJoinPool forkJoinPool = new ForkJoinPool(2);
+    private static ForkJoinPool forkJoinPool = new ForkJoinPool(8);
 
     /**
      * Below is the driver code for running the application
@@ -69,15 +69,15 @@ public class Genotype {
             });
 
             genotypePopulation = new ArrayList<>(temp);
-            for (Person p : genotypePopulation) {
+            /**for (Person p : genotypePopulation) {
                 if (p != null)
                     System.out.println(p);
-            }
+            }**/
             temp.clear();
 
         }
         long endTime = System.nanoTime();
-        System.out.println("Time taken for find the super human genome is " + (endTime - startTime));
+        System.out.println("Time taken to find the super human genome is " + (endTime - startTime));
     }
 
     /**
@@ -118,7 +118,7 @@ public class Genotype {
                                 double rankvalue = generator.generatePhenotype(genotypePopulation.get(randomperson1), genotypePopulation.get(randomperson2));
                                 if (generator.isFit(rankvalue)) {
                                     String child = genotypePopulation.get(randomperson1).getPersonID() + genotypePopulation.get(randomperson2).getPersonID();
-                                    System.out.println(child);
+                                    System.out.println("\033[1mPerson having super genes\033[1m   "+child);
                                     break;
                                 } else {
                                     Person person = new Person();
@@ -151,7 +151,7 @@ public class Genotype {
                                 double rankvalue = generator.generatePhenotype(genotypePopulation.get(randomperson1), genotypePopulation.get(randomperson2));
                                 if (generator.isFit(rankvalue)) {
                                     String child = genotypePopulation.get(randomperson1).getPersonID() + genotypePopulation.get(randomperson2).getPersonID();
-                                    System.out.println(child);
+                                    System.out.println("\033[1mPerson having super genes\033[1m   "+child);
                                     break;
                                 } else {
                                     Person person = new Person();

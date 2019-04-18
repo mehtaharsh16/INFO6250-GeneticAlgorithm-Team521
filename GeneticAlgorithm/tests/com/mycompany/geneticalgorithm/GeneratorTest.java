@@ -73,4 +73,35 @@ public class GeneratorTest {
 
         assertTrue(p1.getRank() != fitValue);
     }
+
+    @Test
+    public void chekSuperGene() {
+        final double fitValue = 100;
+
+        Person p = new Person();
+        p.setPersonID("P3F");
+        p.setSex('F');
+        p.setFertile(true);
+        p.setRank(50);
+        p.setGeneration(1);
+        assertEquals(p.getSex(),'F');
+
+        Person p1 = new Person();
+        p1.setPersonID("P21M");
+        p1.setSex('M');
+        p1.setFertile(true);
+        p1.setRank(100);
+        p1.setGeneration(1);
+        assertEquals(p1.getFertile(),true);
+
+
+        double rankValue;
+        double male = (p.getPersonID().length()) * 0.33;
+        double female = (p1.getPersonID().length()) * 1.35;
+        rankValue = (Math.log(1.5) * (p.getRank() * female + p1.getRank() * male) * 0.2);
+
+        assertTrue(rankValue == 29.923324978382535);
+        assertTrue(rankValue != fitValue);
+
+    }
 }
