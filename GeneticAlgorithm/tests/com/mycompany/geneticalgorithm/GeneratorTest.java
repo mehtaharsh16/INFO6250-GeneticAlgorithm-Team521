@@ -9,6 +9,9 @@ import static org.junit.Assert.*;
 
 public class GeneratorTest {
 
+    /**
+     * checkSex() method is used to check sex of individual
+     */
     @Test
     public void checkSex() {
         Person p = new Person();
@@ -20,6 +23,9 @@ public class GeneratorTest {
         assertEquals(p.getSex(),'M');
     }
 
+    /**
+     * checkFertilty() method is used to check fertility of individual
+     */
     @Test
     public void checkFertilty() {
         Person p = new Person();
@@ -31,6 +37,10 @@ public class GeneratorTest {
         assertEquals(p.getFertile(),true);
     }
 
+
+    /**
+     * generatePhenotype() method is used to check the generation of Phenotype
+     */
     @Test
     public void generatePhenotype() {
         Person p = new Person();
@@ -58,6 +68,9 @@ public class GeneratorTest {
         assertTrue(rankValue == 20.398949588921752);
     }
 
+    /**
+     * isFit() method is used the fitness of individual
+     */
     @Test
     public void isFit() {
         final double fitValue = 200;
