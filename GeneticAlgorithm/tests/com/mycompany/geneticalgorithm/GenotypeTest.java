@@ -11,6 +11,12 @@ import static org.junit.Assert.*;
 
 public class GenotypeTest {
 
+    /**
+     * superGeneGeneratorTest
+     * This function tests the crossover functionality
+     * Since we are setting the rank of individual to 0 no perfect human is found across different generations
+     */
+
     @Test
     public void superGeneGeneratorTest() {
         List<Person> genotypePopulation = new ArrayList<Person>();
@@ -27,7 +33,7 @@ public class GenotypeTest {
             p.setPersonID("P" + i + sex);
             p.setSex(sex);
             p.setFertile(r.nextBoolean());
-            p.setRank((r.nextInt(800) / 3) + 1);
+            p.setRank(0);
             p.setGeneration(1);
 
             genotypePopulation.add(p);
@@ -60,6 +66,11 @@ public class GenotypeTest {
 
         }
 
+    /**
+     * superGeneGeneratorTestFertile
+     * This function tests the crossover functionality based on Fertility property
+     * Since we are setting the fertile property of individual to false no mutations happens i.e further generations are not reproduced
+     */
     @Test
     public void superGeneGeneratorTestFertile() {
         List<Person> genotypePopulation = new ArrayList<Person>();
@@ -100,6 +111,12 @@ public class GenotypeTest {
 
 
     }
+
+    /**
+     * superGeneGeneratorCheckSex
+     * This function tests the crossover functionality based on sex
+     * Since we are mating with people of same sex no reproduction happens and no further generations are generated
+     */
 
     @Test
     public void superGeneGeneratorCheckSex() {
