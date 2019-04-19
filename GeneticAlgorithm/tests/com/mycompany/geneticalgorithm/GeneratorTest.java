@@ -69,7 +69,7 @@ public class GeneratorTest {
     }
 
     /**
-     * isFit() method is used the fitness of individual
+     * isFit() method is used to test fitness of individual
      */
     @Test
     public void isFit() {
@@ -87,6 +87,9 @@ public class GeneratorTest {
         assertTrue(p1.getRank() != fitValue);
     }
 
+    /**
+     * chekSuperGene() method is used to test chekSuperGene generation
+     */
     @Test
     public void chekSuperGene() {
         final double fitValue = 100;
